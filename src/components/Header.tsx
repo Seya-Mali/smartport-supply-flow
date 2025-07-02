@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Bell, Search, User } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { NotificationDropdown } from './NotificationDropdown';
 
 export const Header = () => {
   return (
@@ -28,12 +28,7 @@ export const Header = () => {
           <div className="text-xs text-slate-500">Live Status: Active</div>
         </div>
         
-        <Button variant="ghost" size="sm" className="relative">
-          <Bell className="w-4 h-4" />
-          <Badge className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
-            3
-          </Badge>
-        </Button>
+        <NotificationDropdown />
         
         <Button variant="ghost" size="sm">
           <User className="w-4 h-4" />

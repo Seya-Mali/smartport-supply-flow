@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Layout } from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,15 +7,45 @@ import { Badge } from "@/components/ui/badge";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { TrendingUp, TrendingDown, DollarSign, Clock, Ship, Target } from 'lucide-react';
 
+const weeklyData = [
+  { period: 'Mon', onTime: 92, delayed: 8, cost: 0.5 },
+  { period: 'Tue', onTime: 89, delayed: 11, cost: 0.6 },
+  { period: 'Wed', onTime: 94, delayed: 6, cost: 0.4 },
+  { period: 'Thu', onTime: 96, delayed: 4, cost: 0.3 },
+  { period: 'Fri', onTime: 88, delayed: 12, cost: 0.7 },
+  { period: 'Sat', onTime: 91, delayed: 9, cost: 0.5 },
+  { period: 'Sun', onTime: 93, delayed: 7, cost: 0.4 }
+];
+
+const monthlyData = [
+  { period: 'Jan', onTime: 85, delayed: 15, cost: 2.1 },
+  { period: 'Feb', onTime: 88, delayed: 12, cost: 2.0 },
+  { period: 'Mar', onTime: 91, delayed: 9, cost: 1.9 },
+  { period: 'Apr', onTime: 93, delayed: 7, cost: 1.8 },
+  { period: 'May', onTime: 89, delayed: 11, cost: 2.0 },
+  { period: 'Jun', onTime: 95, delayed: 5, cost: 1.7 },
+  { period: 'Jul', onTime: 97, delayed: 3, cost: 1.6 },
+  { period: 'Aug', onTime: 94, delayed: 6, cost: 1.7 }
+];
+
+const quarterlyData = [
+  { period: 'Q1 2023', onTime: 88, delayed: 12, cost: 6.0 },
+  { period: 'Q2 2023', onTime: 92, delayed: 8, cost: 5.5 },
+  { period: 'Q3 2023', onTime: 95, delayed: 5, cost: 4.9 },
+  { period: 'Q4 2023', onTime: 89, delayed: 11, cost: 5.8 },
+  { period: 'Q1 2024', onTime: 93, delayed: 7, cost: 5.1 },
+  { period: 'Q2 2024', onTime: 96, delayed: 4, cost: 4.7 }
+];
+
 const performanceData = [
-  { month: 'Jan', onTime: 85, delayed: 15, cost: 2.1 },
-  { month: 'Feb', onTime: 88, delayed: 12, cost: 2.0 },
-  { month: 'Mar', onTime: 91, delayed: 9, cost: 1.9 },
-  { month: 'Apr', onTime: 93, delayed: 7, cost: 1.8 },
-  { month: 'May', onTime: 89, delayed: 11, cost: 2.0 },
-  { month: 'Jun', onTime: 95, delayed: 5, cost: 1.7 },
-  { month: 'Jul', onTime: 97, delayed: 3, cost: 1.6 },
-  { month: 'Aug', onTime: 94, delayed: 6, cost: 1.7 }
+  { period: 'Jan', onTime: 85, delayed: 15, cost: 2.1 },
+  { period: 'Feb', onTime: 88, delayed: 12, cost: 2.0 },
+  { period: 'Mar', onTime: 91, delayed: 9, cost: 1.9 },
+  { period: 'Apr', onTime: 93, delayed: 7, cost: 1.8 },
+  { period: 'May', onTime: 89, delayed: 11, cost: 2.0 },
+  { period: 'Jun', onTime: 95, delayed: 5, cost: 1.7 },
+  { period: 'Jul', onTime: 97, delayed: 3, cost: 1.6 },
+  { period: 'Aug', onTime: 94, delayed: 6, cost: 1.7 }
 ];
 
 const routePerformance = [
@@ -37,6 +66,16 @@ const portData = [
 
 const Analytics = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('month');
+
+  const getDataForPeriod = () => {
+    switch (selectedPeriod) {
+      case 'week': return weeklyData;
+      case 'quarter': return quarterlyData;
+      default: return monthlyData;
+    }
+  };
+
+  const currentData = getDataForPeriod();
 
   return (
     <Layout>
@@ -59,7 +98,7 @@ const Analytics = () => {
               <div className="text-2xl font-bold text-slate-900">94.2%</div>
               <div className="flex items-center mt-1">
                 <TrendingUp className="w-3 h-3 text-green-500 mr-1" />
-                <span className="text-xs text-green-600 font-medium">+2.1% vs last month</span>
+                <span className="text-xs text-green-600 font-medium">+2.1% vs last {selectedPeriod}</span>
               </div>
             </CardContent>
           </Card>
@@ -70,7 +109,9 @@ const Analytics = () => {
               <DollarSign className="w-4 h-4 text-blue-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-slate-900">$1.7M</div>
+              <div className="text-2xl font-bold text-slate-900">
+                ${selectedPeriod === 'week' ? '0.5M' : selectedPeriod === 'quarter' ? '5.1M' : '1.7M'}
+              </div>
               <div className="flex items-center mt-1">
                 <TrendingDown className="w-3 h-3 text-green-500 mr-1" />
                 <span className="text-xs text-green-600 font-medium">-12% reduction</span>
@@ -84,7 +125,9 @@ const Analytics = () => {
               <Clock className="w-4 h-4 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-slate-900">12.3 days</div>
+              <div className="text-2xl font-bold text-slate-900">
+                {selectedPeriod === 'week' ? '2.1 days' : selectedPeriod === 'quarter' ? '11.8 days' : '12.3 days'}
+              </div>
               <div className="flex items-center mt-1">
                 <TrendingDown className="w-3 h-3 text-green-500 mr-1" />
                 <span className="text-xs text-green-600 font-medium">-1.2 days improved</span>
@@ -140,13 +183,13 @@ const Analytics = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg font-semibold">On-Time Performance Trend</CardTitle>
-              <p className="text-sm text-slate-600">Monthly performance metrics</p>
+              <p className="text-sm text-slate-600">{selectedPeriod === 'week' ? 'Daily' : selectedPeriod === 'quarter' ? 'Quarterly' : 'Monthly'} performance metrics</p>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={performanceData}>
+                <LineChart data={currentData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                  <XAxis dataKey="month" tick={{ fill: '#64748b', fontSize: 12 }} />
+                  <XAxis dataKey="period" tick={{ fill: '#64748b', fontSize: 12 }} />
                   <YAxis tick={{ fill: '#64748b', fontSize: 12 }} />
                   <Tooltip 
                     contentStyle={{
@@ -243,13 +286,13 @@ const Analytics = () => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">Cost Analysis Trend</CardTitle>
-            <p className="text-sm text-slate-600">Monthly cost optimization impact</p>
+            <p className="text-sm text-slate-600">{selectedPeriod === 'week' ? 'Daily' : selectedPeriod === 'quarter' ? 'Quarterly' : 'Monthly'} cost optimization impact</p>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={performanceData}>
+              <BarChart data={currentData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="month" tick={{ fill: '#64748b', fontSize: 12 }} />
+                <XAxis dataKey="period" tick={{ fill: '#64748b', fontSize: 12 }} />
                 <YAxis tick={{ fill: '#64748b', fontSize: 12 }} />
                 <Tooltip 
                   contentStyle={{

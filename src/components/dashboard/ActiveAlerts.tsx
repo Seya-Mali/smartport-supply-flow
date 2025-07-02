@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Clock, Ship, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const alerts = [
   {
@@ -39,6 +39,8 @@ const alerts = [
 ];
 
 export const ActiveAlerts = () => {
+  const navigate = useNavigate();
+
   const getAlertColor = (type: string) => {
     switch (type) {
       case 'high': return 'bg-red-50 border-red-200';
@@ -95,14 +97,23 @@ export const ActiveAlerts = () => {
                   </div>
                 </div>
               </div>
-              <Button size="sm" variant="outline" className="ml-4">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="ml-4"
+                onClick={() => navigate('/alerts')}
+              >
                 {alert.action}
               </Button>
             </div>
           </div>
         ))}
         
-        <Button variant="ghost" className="w-full text-sm text-slate-600 hover:text-slate-900">
+        <Button 
+          variant="ghost" 
+          className="w-full text-sm text-slate-600 hover:text-slate-900"
+          onClick={() => navigate('/alerts')}
+        >
           View All Alerts →
         </Button>
       </CardContent>

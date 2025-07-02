@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Ports from "./pages/Ports";
 import Shipments from "./pages/Shipments";
-import Routes as RoutesPage from "./pages/Routes";
+import RoutesPage from "./pages/Routes";
 import Alerts from "./pages/Alerts";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";

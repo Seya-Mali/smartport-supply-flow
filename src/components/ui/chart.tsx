@@ -74,28 +74,41 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     return null
   }
 
-  return (
-    <style
-      dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
-  })
-  .join("\n")}
-}
-`
-          )
-          .join("\n"),
-      }}
-    />
-  )
+  // Create stylesheet rules programmatically rather than using dangerouslySetInnerHTML
+  React.useEffect(() => {
+    // Create a style element
+    const styleEl = document.createElement('style');
+    
+    // Generate CSS content
+    let cssContent = '';
+    
+    Object.entries(THEMES).forEach(([theme, prefix]) => {
+      cssContent += `${prefix} [data-chart=${id}] {\n`;
+      
+      colorConfig.forEach(([key, itemConfig]) => {
+        const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
+        if (color) {
+          cssContent += `  --color-${key}: ${color};\n`;
+        }
+      });
+      
+      cssContent += '}\n';
+    });
+    
+    // Set the style content
+    styleEl.textContent = cssContent;
+    
+    // Add to document head
+    document.head.appendChild(styleEl);
+    
+    // Cleanup on unmount
+    return () => {
+      document.head.removeChild(styleEl);
+    };
+  }, [id, colorConfig]);
+  
+  // Return null since we're adding styles via useEffect
+  return null;
 }
 
 const ChartTooltip = RechartsPrimitive.Tooltip

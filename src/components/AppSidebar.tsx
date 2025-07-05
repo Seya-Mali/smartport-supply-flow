@@ -8,7 +8,8 @@ import {
   AlertTriangle, 
   TrendingUp, 
   Settings,
-  Anchor
+  Anchor,
+  Navigation
 } from "lucide-react";
 import {
   Sidebar,
@@ -27,6 +28,7 @@ const navigationItems = [
   { title: "Port Monitor", url: "/ports", icon: Anchor },
   { title: "Active Shipments", url: "/shipments", icon: Ship },
   { title: "Route Optimization", url: "/routes", icon: MapPin },
+  { title: "Vessel Tracking", url: "/vessel-tracking", icon: Navigation },
   { title: "Alerts", url: "/alerts", icon: AlertTriangle },
   { title: "Analytics", url: "/analytics", icon: TrendingUp },
   { title: "Settings", url: "/settings", icon: Settings },

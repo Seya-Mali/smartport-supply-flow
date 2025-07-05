@@ -11,6 +11,7 @@ import RoutesPage from "./pages/Routes";
 import Alerts from "./pages/Alerts";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
+import VesselTracking from "./pages/VesselTracking";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/ports" element={<Ports />} />
           <Route path="/shipments" element={<Shipments />} />
           <Route path="/routes" element={<RoutesPage />} />
+          <Route path="/vessel-tracking" element={<VesselTracking />} />
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/settings" element={<Settings />} />

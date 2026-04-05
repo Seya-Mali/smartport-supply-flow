@@ -1,73 +1,55 @@
-# Welcome to your Lovable project
+# SmartPort Supply Flow
 
-## Project info
+SmartPort Supply Flow is a React + TypeScript dashboard for monitoring shipment routes, vessel movement, port conditions, congestion, and operational alerts.
 
-**URL**: https://lovable.dev/projects/e998cd8b-7a07-4022-879a-ade6d7510ebe
+## Getting started
 
-## How can I edit this code?
+Prerequisites:
 
-There are several ways of editing your application.
+- Node.js 18+
+- npm
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/e998cd8b-7a07-4022-879a-ade6d7510ebe) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Install dependencies and start the development server:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The local dev server runs at the address printed in your terminal (typically http://localhost:8080).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available scripts
 
-**Use GitHub Codespaces**
+- `npm run dev`: Start the development server.
+- `npm run build`: Create a production build.
+- `npm run build:dev`: Build using development mode.
+- `npm run preview`: Preview the production build.
+- `npm run lint`: Run ESLint.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
+## Tech stack
 
 - Vite
+- React 18
 - TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
+- shadcn/ui + Radix UI
+- Recharts
 
-## How can I deploy this project?
+## Project structure
 
-Simply open [Lovable](https://lovable.dev/projects/e998cd8b-7a07-4022-879a-ade6d7510ebe) and click on Share -> Publish.
+- `src/pages`: Route-level pages
+- `src/components`: Shared and feature-specific components
+- `src/components/dashboard`: Dashboard widgets
+- `src/components/ui`: Reusable UI primitives
+- `src/hooks`: Shared React hooks
+- `src/lib`: Utility functions
 
-## Can I connect a custom domain to my Lovable project?
+## Deployment
 
-Yes, you can!
+Build the project with:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```sh
+npm run build
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Then deploy the generated `dist` folder to your preferred static hosting provider.
